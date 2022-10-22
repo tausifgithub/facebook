@@ -13,46 +13,9 @@
           <include name="logOutApplication"/>
           <include name="createpomObjects"/>
           <include name="verifyHelpCenterButton"/>
-          <include name="verifyGoBackToMessenger"/>
           <include name="closeBrowser"/>
         </methods>
       </class> <!-- Testfb.TestNGClass -->
     </classes>
   </test> <!-- ChromeTest(failed) -->
-  <test thread-count="2" parallel="tests" name="OperaTest(failed)">
-    <parameter name="browser" value="Opera"/>
-    <classes>
-      <class name="Testfb.TestNGClass">
-        <methods>
-          <include name="afterSuit"/>
-          <include name="openRoomsPage"/>
-          <include name="cleanPOMobject"/>
-          <include name="launchBrowser"/>
-          <include name="logOutApplication"/>
-          <include name="createpomObjects"/>
-          <include name="verifyHelpCenterButton"/>
-          <include name="verifyGoBackToMessenger"/>
-          <include name="closeBrowser"/>
-        </methods>
-      </class> <!-- Testfb.TestNGClass -->
-    </classes>
-  </test> <!-- OperaTest(failed) -->
-  <test thread-count="2" parallel="tests" name="FirefoxTest(failed)">
-    <parameter name="browser" value="Firefox"/>
-    <classes>
-      <class name="Testfb.TestNGClass">
-        <methods>
-          <include name="afterSuit"/>
-          <include name="openRoomsPage"/>
-          <include name="cleanPOMobject"/>
-          <include name="launchBrowser"/>
-          <include name="logOutApplication"/>
-          <include name="createpomObjects"/>
-          <include name="verifyHelpCenterButton"/>
-          <include name="verifyGoBackToMessenger"/>
-          <include name="closeBrowser"/>
-        </methods>
-      </class> <!-- Testfb.TestNGClass -->
-    </classes>
-  </test> <!-- FirefoxTest(failed) -->
 </suite> <!-- Failed suite [Suite1234] -->

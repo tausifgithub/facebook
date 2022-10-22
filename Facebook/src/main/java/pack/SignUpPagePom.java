@@ -7,9 +7,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class SignUpPagePom {
-	
+	private WebDriver driver;
+	private WebDriverWait wait;
+	private Select select;
        
 	@FindBy (xpath="(//a[@role='button'])[2]")
     private WebElement CreateNewAccButton;
@@ -60,6 +64,7 @@ public class SignUpPagePom {
 public SignUpPagePom (WebDriver driver) {
 	 
 	PageFactory.initElements(driver, this);
+	
 }
 
 
@@ -67,20 +72,20 @@ public void clickonCreatAccButton() {
 	CreateNewAccButton.click();
 }
 
-public void sendUserName() {
-	enterfirstName.sendKeys("Tappu k");
+public void sendUserName(String firstName) {
+	enterfirstName.sendKeys(firstName);
 }
 
-public void sendsurName() {
-	enterSurname.sendKeys("Papa");
+public void sendsurName(String lastName) {
+	enterSurname.sendKeys(lastName);
 }
 
-public void sendMobileNumber() {
-	enterMobileNumber.sendKeys("9985142983");
+public void sendMobileNumber(String moNumber) {
+	enterMobileNumber.sendKeys(moNumber);
 }
 
-public void sendPassword() {
-	enterPassword.sendKeys("12345678");
+public void sendPassword(String password) {
+	enterPassword.sendKeys(password);
 }
 
 public void enterDate() {

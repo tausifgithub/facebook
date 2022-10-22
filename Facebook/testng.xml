@@ -9,28 +9,13 @@
       </classes>
   </test> <!-- Test -->
   
-    <test name="OperaTest">
+   <test name="OperaTest">
   <parameter name="browser" value="Opera"/>
     <classes>
+     <class name="Testfb.TestNGClass"/> 
       <class name="Testfb.TestNG_2"/>
-      <class name="Testfb.TestNGClass"/>
-    </classes>
+      </classes>
   </test> <!-- Test -->
-  
-  
-   <test name="FirefoxTest">
-  <parameter name="browser" value="Firefox"/>
-    <classes>
-      <class name="Testfb.TestNG_2"/>
-      <class name="Testfb.TestNGClass"/>
-    </classes>
-  </test> <!-- Test -->
-  
-   
-  
-  
-  
-  
   
   
 </suite> <!-- Suite1234 -->

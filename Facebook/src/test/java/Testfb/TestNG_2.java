@@ -7,7 +7,7 @@ import Setup.Base;
 import Utils.Utility;
 
 import org.testng.annotations.BeforeClass;
-import org.testng.AssertJUnit;
+
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 import org.testng.annotations.BeforeClass;
@@ -20,6 +20,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
@@ -40,6 +41,7 @@ public class TestNG_2 extends Base {
 	private LogInPagePom logInPagePom;
 	private SignUpPagePom signUpPagePom;
 	private DevloperLogIn devloperLogIn;
+	int testCase_id;
 	
 @BeforeSuite
 	public void beforeSuite()
@@ -87,23 +89,21 @@ public void launchBrowser(String browserName)
 	  System.out.println("before method 2");
 	  driver.get("https://www.facebook.com/");
 	  String url=driver.getCurrentUrl();
-	  System.out.println(url);
-	  AssertJUnit.assertEquals(url, "https://www.facebook.com/");
+	  Assert.assertEquals(url, "https://www.facebook.com/");
 	  logInPagePom.sendUserName(Utility.getTD(0, 1));
 	  logInPagePom.sendPassword(Utility.getTD(1, 1));
 	 	  	  
  }
 	
  @Test
- public void signUpButton() throws InterruptedException
+ public void signUpButton() throws InterruptedException, EncryptedDocumentException, IOException
  {
-	 System.out.println("test 22");
-	 Thread.sleep(3000);
+	 testCase_id=201;
 	 logInPagePom.clickOnCreateButton();
-	 signUpPagePom.sendUserName();
-	 signUpPagePom.sendsurName();
-	 signUpPagePom.sendMobileNumber();
-	 signUpPagePom.sendPassword();
+	 signUpPagePom.sendUserName(Utility.getTD(4, 0));
+	 signUpPagePom.sendsurName(Utility.getTD(4, 1));
+	 signUpPagePom.sendMobileNumber(Utility.getTD(5, 0));
+	 signUpPagePom.sendPassword(Utility.getTD(6, 0));
 	 signUpPagePom.enterDate();
 	 signUpPagePom.enterMonth();
 	 signUpPagePom.enterYear();
@@ -115,21 +115,26 @@ public void launchBrowser(String browserName)
  @Test
  public void devloperLogIn()
  {
-	 System.out.println("test 2");
+	 testCase_id=202;
 	 logInPagePom.clickOnDevloper();
 	 String devurl=driver.getCurrentUrl();
 	 String devTitle=driver.getTitle();
 	 System.out.println(devTitle);
-	 AssertJUnit.assertEquals(devurl, "https://developers.facebook.com/?ref=pf");
-	AssertJUnit.assertEquals(devTitle, "Meta for Developers");
+	 Assert.assertEquals(devurl, "https://developers.facebook.com/?ref=pf");
+	 Assert.assertEquals(devTitle, "Meta for Developers");
      
  }
  
  
 @AfterMethod
-public void logOut()
-{
-	System.out.println("after method 2");
+public void logOut(ITestResult result) throws IOException
+{   
+	if(result.getStatus()==ITestResult.FAILURE)
+	{
+		System.out.println("status failed ");
+	Utility.captureScreenShot(driver, testCase_id);
+	}
+
 	System.out.println("LogOUt");
 }
  

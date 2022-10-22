@@ -25,7 +25,7 @@ public class WatchPom {
 	{
 	PageFactory.initElements(driver, this);
 	this.driver=driver;
-	wait =new WebDriverWait(driver,20);
+	wait =new WebDriverWait(driver,10);
 	
 	}
 

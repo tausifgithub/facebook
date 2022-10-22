@@ -37,10 +37,10 @@ signUpPagePom.clickonCreatAccButton();
    
       
 
-signUpPagePom.sendUserName();
-signUpPagePom.sendsurName();
-signUpPagePom.sendMobileNumber();
-signUpPagePom.sendPassword();
+//signUpPagePom.sendUserName();
+//signUpPagePom.sendsurName();
+//signUpPagePom.sendMobileNumber();
+//signUpPagePom.sendPassword();
 signUpPagePom.enterDate();
 signUpPagePom.enterMonth();
 signUpPagePom.enterYear();

@@ -6,11 +6,14 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 import org.testng.annotations.BeforeClass;
+
+import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.Assert;
+import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterSuite;
 import org.testng.annotations.AfterTest;
@@ -22,6 +25,7 @@ import org.testng.annotations.Parameters;
 import org.testng.asserts.SoftAssert;
 
 import Setup.Base;
+import Utils.Utility;
 import pack.MessengerPom;
 import pack.Roomspom;
 import pack.SignUpPagePom;
@@ -32,10 +36,11 @@ public class TestNGClass extends Base{
 	private Roomspom roomspom;
 	private MessengerPom messengerPom;
 	private SoftAssert soft;
+	int testCase_id;
 	
 	 
 	@Parameters ("browser")
-	@BeforeTest
+    @BeforeTest
 	public void launchBrowser(String browserName)
 	{
 		System.out.println("Before test 1");
@@ -70,42 +75,26 @@ public class TestNGClass extends Base{
 	@BeforeMethod
 	public void openRoomsPage() throws InterruptedException
 	{
+	   soft=new SoftAssert();
 	   System.out.println("Before Method 1");
 	   driver.get("https://www.facebook.com");
-	   String messengerRoomsPageUrl= driver.getCurrentUrl();
-	   String messengerPageUrl= driver.getCurrentUrl();
-		  
-	   soft.assertEquals(messengerPageUrl, "https://www.messenger.com/");
-	   soft.assertAll();
-	   messengerPom.roomsClick();
-	   Thread.sleep(3000);
-	    System.out.println(messengerRoomsPageUrl);
-	   soft.assertEquals(messengerRoomsPageUrl, "https://www.messenger.com/rooms");
-	   soft.assertAll();
-	   Thread.sleep(3000);
 	   signUpPagePom.clickMessenger();
-	   Thread.sleep(3000);
-	   System.out.println(messengerPageUrl);
-	   soft.assertEquals(messengerPageUrl, "https://www.messenger.com/");
-	   soft.assertAll();
+	   Assert.assertEquals(driver.getCurrentUrl(),"https://www.messenger.com/"); 
+	   soft.assertEquals(driver.getTitle(), "Messenger");
 	   messengerPom.roomsClick();
-	   Thread.sleep(3000);
-	   System.out.println(messengerRoomsPageUrl);
-	   soft.assertEquals(messengerRoomsPageUrl, "https://www.messenger.com/rooms");
-	   soft.assertAll();
-	
 	}
 	
 	@Test
 	public void verifyGoBackToMessenger()
 	{
-		System.out.println("Test1");
+		testCase_id=100;
+		System.out.println("Test100");
 		roomspom.return2massengerClick();
 		String url=	driver.getCurrentUrl();
 		String title=driver.getTitle();
-	   soft.assertEquals(url, "https://www.messenger.com/");
-	   soft.assertEquals(title, "Messenger");
-	   soft.assertAll();
+	    soft.assertEquals(url, "https://www.messenger.com/");
+	    soft.assertEquals(title, "Messenger");
+	    soft.assertAll();
 		
 //************************Hard Assert**************************************************
    
@@ -124,19 +113,24 @@ public class TestNGClass extends Base{
 	@Test
 	public void verifyHelpCenterButton()
 	{
-		System.out.println("Test 11");
+		testCase_id=101;
+		System.out.println("Test 200");
 		roomspom.clickCenter();
 		String url=	driver.getCurrentUrl();
 		String title=driver.getTitle();
 		soft.assertEquals(url, "https://www.messenger.com/help");
-		soft.assertEquals(title, "https://www.messenger.com/help");
 		soft.assertAll();
-	
+		
 	}
 	
 	@AfterMethod
-	public void logOutApplication()
+	public void logOutApplication(ITestResult result) throws IOException
 	{
+		if(result.getStatus()==ITestResult.FAILURE)
+		{
+			System.out.println("status failed ");
+			Utility.captureScreenShot(driver, testCase_id );
+		}
 		System.out.println("After method 1" );
 		System.out.println("Logout");
 	}
